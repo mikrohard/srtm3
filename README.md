@@ -15,4 +15,4 @@ Notes:
 
 1.) The *.hgt files need to be in the same folder as the binary.
 
-2.) Currently only works with NXXEYYY.hgt files
+2.) The parser supports all hemispheres

@@ -18,11 +18,18 @@ int main (int argc, char **argv)
 	FILE *hgt_file;
 	
 	// find the correct file
-	float lat_name = floorf(lat);
-	float lon_name = floorf(lon);
+	float lat_name = fabs(floorf(lat));
+	float lon_name = fabs(floorf(lon));
 
 	char hgt_name[12];
-	sprintf(hgt_name, "N%02.0fE%03.0f.hgt", lat_name, lon_name);
+	char vertical_hemisphere = 'N';
+	char horizontal_hemisphere = 'E';
+	if (lat < 0)
+		vertical_hemisphere = 'S';
+	if (lon < 0)
+		horizontal_hemisphere = 'W';
+		
+	sprintf(hgt_name, "%c%02.0f%c%03.0f.hgt", vertical_hemisphere, lat_name, horizontal_hemisphere, lon_name);
 	
 	printf("I'll open the file: %s\n", hgt_name);
 	hgt_file = fopen(hgt_name, "r"); // open the hgt file
@@ -36,9 +43,9 @@ int main (int argc, char **argv)
 	// calculate the correct file offset
 	int value_offset = 2; // 16 bit short integers, 2 bytes
 	
-	float lat_delta = lat - lat_name;
-	float lon_delta = lon - lon_name;
-	
+	float lat_delta = fabs(fabs(lat) - fabs(lat_name));
+	float lon_delta = fabs(fabs(lon) - fabs(lon_name));
+
 	int strm_size = 1201;
 	int lat_row = (int)(lat_delta*strm_size);
 	int lon_col = (int)(lon_delta*strm_size);
