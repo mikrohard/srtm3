@@ -29,7 +29,7 @@ int main (int argc, char **argv)
 
 	if (!hgt_file)
 	{
-		printf("The needed hgt file could not be found.");
+		printf("The needed hgt file could not be found.\n");
 		return -1;
 	}
 
