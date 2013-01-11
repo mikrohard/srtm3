@@ -6,7 +6,7 @@ int main (int argc, char **argv)
 {
 	if (argc < 3)
 	{
-		printf("Not enough arguments...\n");
+		printf("Usage: srtm3 [lat] [lon]\n");
 		return -1;
 	}
 	float lat = atof(argv[1]);
